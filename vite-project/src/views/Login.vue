@@ -15,7 +15,7 @@
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
-            <input id="email" name="email" type="email" autocomplete="email" required="true" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input id="email" name="email" v-model="user.email" type="email" autocomplete="email" required="true" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
           </div>
         </div>
 
@@ -24,7 +24,15 @@
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
           </div>
           <div class="mt-2">
-            <input id="password" name="password" type="password" autocomplete="current-password" required="true" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input id="password" name="password" v-model="user.password" type="password" autocomplete="current-password" required="true" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input id="remember" v-model="user.remember" name="remember" type="checkbox"
+            class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+            <label for="remember" class="ml-2 block text-sm text-gray-900">Remember me</label>
           </div>
         </div>
 
@@ -36,6 +44,33 @@
       </form>
   </div>
 </template>
+
+<script setup>
+import store from '../store'
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const user = {
+  email: '',
+  password: '',
+  remember: false
+}
+
+function register(ev) {
+  ev.preventDefault();
+
+  store.dispatch('login', user)
+  .then( (res) => {
+    if( res.message ){
+      alert(res.message);
+    }else{
+      router.push({name: 'Dashboard'})
+    }
+
+  } )
+}
+</script>
 
 
 

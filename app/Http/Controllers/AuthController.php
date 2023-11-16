@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function login(Request $request){
         $credentials = $request->validate([
-            'email' => 'required|email|string|exists:user,email',
+            'email' => 'required|email|string|exists:users,email',
             'password' => [
                 'required',
             ],
@@ -63,5 +63,15 @@ class AuthController extends Controller
             'token' => $token
         ]);
 
+    }
+
+    public function logout(){
+        $user = Auth::user();
+
+        $user->currentAcessToken()->delete();
+
+        return response([
+            'sucsess' => true
+        ]);
     }
 }

@@ -20,10 +20,10 @@ const tmpSurveys = [
         description: null,
         data: {
           options: [
-            { uuid: "", text: "USA"},
-            { uuid: "", text: "Brasil"},
-            { uuid: "", text: "Germany"},
-            { uuid: "", text: "India"}
+            { uuid: "f1c2c056-5d32-4219-915f-596ebc6f8197", text: "USA"},
+            { uuid: "ec8d1a93-6070-4a2e-b2e2-1b9333d5e309", text: "Brasil"},
+            { uuid: "d27f8a94-51e9-42d9-b480-09da2dbcc411", text: "Germany"},
+            { uuid: "b824f2cb-cb6d-4f49-bc1b-9b2d23d9b930", text: "India"}
           ]
         }
       },
@@ -34,9 +34,9 @@ const tmpSurveys = [
         description: "teste teste",
         data: {
           options: [
-            { uuid: "", text: "Javascript"},
-            { uuid: "", text: "HTML"},
-            { uuid: "", text: "PHP"},
+            { uuid: "91d63bd4-b5e9-4e6c-8a3d-70cb0a83b056", text: "Javascript"},
+            { uuid: "1a7ed6a0-cc92-4d8b-bc1c-2edfc19e6e24", text: "HTML"},
+            { uuid: "8e22d880-075e-4aaf-8f7b-1f6237d207fc", text: "PHP"},
           ]
         }
       },
@@ -47,9 +47,9 @@ const tmpSurveys = [
         description: "teste teste",
         data: {
           options: [
-            { uuid: "", text: "laravel 5"},
-            { uuid: "", text: "laravel 6"},
-            { uuid: "", text: "laravel 7"},
+            { uuid: "3d7ec0f7-16aa-4f47-bf4a-38c9cde8f1c3", text: "laravel 5"},
+            { uuid: "ee8fcb31-6962-4eac-bef8-2c1938ad45cd", text: "laravel 6"},
+            { uuid: "d041ac1f-75a2-4c4d-b083-0d18be7a8653", text: "laravel 7"},
           ]
         }
       },
@@ -60,9 +60,9 @@ const tmpSurveys = [
         description: "teste teste",
         data: {
           options: [
-            { uuid: "", text: "laravel 5"},
-            { uuid: "", text: "laravel 6"},
-            { uuid: "", text: "laravel 7"},
+            { uuid: "786b09b4-b3dd-4ef1-b3e5-7a98e0c0500a", text: "laravel 5"},
+            { uuid: "a4e0990b-8a85-4f8e-961b-481f6710ff97", text: "laravel 6"},
+            { uuid: "7d7da5b2-4802-496e-bc66-31a1b621e2c5", text: "laravel 7"},
           ]
         }
       },
@@ -73,9 +73,9 @@ const tmpSurveys = [
         description: "teste teste",
         data: {
           options: [
-            { uuid: "", text: "laravel 5"},
-            { uuid: "", text: "laravel 6"},
-            { uuid: "", text: "laravel 7"},
+            { uuid: "731de6c5-4e91-490f-bb3b-d65d2b52d6e2", text: "laravel 5"},
+            { uuid: "c8167a19-9615-4f6c-96fb-8882c47a8582", text: "laravel 6"},
+            { uuid: "22cc0a5b-5228-42ab-99e4-07ee5ef22ea6", text: "laravel 7"},
           ]
         }
       },
@@ -104,7 +104,8 @@ const store = createStore({
     data: {},
     token: sessionStorage.getItem('TOKEN')
     },
-    surveys: [...tmpSurveys]
+    surveys: [...tmpSurveys],
+    questionTypes: ['text', 'select', 'checkbox', 'radio', 'textarea']
   },
   getters: {},
   actions: {

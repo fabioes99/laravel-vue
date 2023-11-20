@@ -20,6 +20,10 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    // por colocar resource nao preciso especificar qual a funcao que este endpoint esta passando
+    // como delete, show, edit , etc..
+    Route::resource('/survey', SurveyController::class);
 });
 
 Route::post('/register', [AuthController::class, 'register']);

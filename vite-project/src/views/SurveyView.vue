@@ -17,8 +17,8 @@
             </label>
             <div class="mt-1 flex items-center">
               <img
-              v-if="model.image"
-              :src="model.image"
+              v-if="model.image_url"
+              :src="model.image_url"
               :alt="model.title"
               class="w-64 h-48 object-cover"
               />
@@ -35,6 +35,7 @@
               class="relative overflow-hidden ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
               <input type="file"
+              @change="onImageChoose"
               class="absolute left-0 top-0 right-0 bottom-0 opacity-0 cursor-pointer"/>
               Change
             </button>
@@ -178,6 +179,18 @@
     };
 
     model.value.questions.splice(index, 0, newQuestion);
+  }
+
+  function onImageChoose(ev){
+    const file = ev.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      model.value.image = reader.result;
+
+      model.value.image_url = reader.result;
+    }
+    reader.readAsDataURL(file);
   }
 
   function deleteQuestion(question){

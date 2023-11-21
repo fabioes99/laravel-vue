@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // por colocar resource nao preciso especificar qual a funcao que este endpoint esta passando
     // como delete, show, edit , etc..
-    Route::resource('/survey', SurveyController::class);
+    Route::resource('/surveys', SurveyController::class);
 });
 
 Route::post('/register', [AuthController::class, 'register']);

@@ -14,9 +14,15 @@ const store = createStore({
     },
     surveys: {
       loading: false,
+      links: [],
       data: []
     },
-    questionTypes: ['text', 'select', 'checkbox', 'radio', 'textarea']
+    questionTypes: ['text', 'select', 'checkbox', 'radio', 'textarea'],
+    notification: {
+      show: false,
+      type: null,
+      message: null
+    }
   },
   getters: {},
   actions: {
@@ -99,6 +105,7 @@ const store = createStore({
       state.currentSurvey.data = survey.data;
     },
     setSurveys: (state, surveys) => {
+      state.surveys.links = surveys.meta.links;
       state.surveys.data = surveys.data;
     },
     logout: (state) => {
@@ -111,7 +118,14 @@ const store = createStore({
       state.user.data = userData.user;
       sessionStorage.setItem('TOKEN', userData.token);
     },
-
+    notify: ( state, {message, type}) => {
+      state.notification.show = true;
+      state.notification.message = message;
+      state.notification.type = type;
+      setTimeout(() => {
+        state.notification.show = false;
+      }, 3000);
+    }
   },
   modules: {},
 });

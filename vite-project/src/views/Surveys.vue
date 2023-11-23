@@ -14,9 +14,21 @@
       </router-link>
     </div>
   </template>
-  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
-    <SurveyListItem v-for="survey in surveys" :key="survey.id" :survey="survey" @delete="deleteSurvey(survey)" />
+  <div v-if="surveys.loading" class="flex justify-center">Loading...</div>
+  <div v-else >
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+      <SurveyListItem
+        v-for="survey in surveys.data"
+        :key="survey.id"
+        :survey="survey"
+        @delete="deleteSurvey(survey)"
+        :style="{animationDelay: `${ind * 0.1}s`}"
+        class="opacity-0 animate-fade-in-down"
+      />
+    </div>
+<pre>{{ surveys.links }}</pre>
   </div>
+
 </PageComponent>
 </template>
 
@@ -29,7 +41,7 @@
 
   const router = useRouter();
 
-  const surveys = computed( () => store.state.surveys.data )
+  const surveys = computed( () => store.state.surveys )
 
   store.dispatch('getSurveys')
 

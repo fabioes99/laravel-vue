@@ -161,7 +161,7 @@
   import store from '../store'
   import { ref, watch, computed } from 'vue'
   import { useRoute, useRouter } from 'vue-router'
-  import QuestionEditor from '../components/editor/questionEditor.vue'
+  import QuestionEditor from '../components/editor/QuestionEditor.vue'
   import { v4 as uuidv4} from 'uuid'
 
   const route = useRoute();
@@ -224,6 +224,7 @@ watch(
   }
 
   function questionChange(question){
+
     model.value.questions = model.value.questions.map(
       (q) => {
         if( q.id === question.id){
@@ -235,6 +236,7 @@ watch(
   }
 
   function saveSurvey(){
+
     store.dispatch("saveSurvey", model.value).then( ({ data }) => {
       router.push({
         name: "SurveyView",

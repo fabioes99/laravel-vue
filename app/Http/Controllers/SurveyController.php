@@ -101,12 +101,13 @@ class SurveyController extends Controller
         //update existing questions
         $questionMap = collect($data['questions'])->keyBy('id');
 
-        return new SurveyResource($survey);
         foreach($survey->questions as $question){
             if(isset($questionMap[$question->id])){
                 $this->updateQuestion($question, $questionMap[$question->id]);
             }
         }
+
+        return new SurveyResource($survey);
     }
 
     /**
@@ -163,8 +164,13 @@ class SurveyController extends Controller
     }
 
     private function createQuestion($data){
+
         if( is_array($data['data']) ){
-            $data['data'] = json_encode($data['data']);
+            if(empty($data['data']))
+                $data['data'] = '{}';
+            else{
+                $data['data'] = json_encode($data['data']);
+            }
         }
 
         $validator = Validator::make($data, [
@@ -180,6 +186,7 @@ class SurveyController extends Controller
             'data' => 'present',
             'survey_id' => 'exists:App\Models\Survey,id'
         ]);
+
 
         return SurveyQuestion::create($validator->validated());
     }

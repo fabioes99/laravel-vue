@@ -64,7 +64,7 @@
         </button>
       </h4>
 
-      <div v-if="!model.data.options.length" class="text-xs text-gray-600 text-center py-3">
+      <div v-if="!model.data.options?.length" class="text-xs text-gray-600 text-center py-3">
         You don`t have any options defined
       </div>
       <div v-for="(option, index) in model.data.options" :key="option.uuid" class="flex items-center mb-1">
@@ -115,10 +115,8 @@ function setOptions(options){
 }
 
 function addOption(){
-  setOptions([
-    ...getOptions(),
-    { uuid: uuidv4(), text: '' }
-  ]);
+  setOptions(getOptions().concat({ uuid: uuidv4(), text: '' }));
+
   dataChange();
 }
 
@@ -128,7 +126,7 @@ function removeOption(op){
 }
 
 function typeChange(){
-  if(shouldHaveOptions){
+  if(shouldHaveOptions()){
     setOptions(getOptions() || []);
   }
   dataChange();
@@ -136,9 +134,6 @@ function typeChange(){
 
 function dataChange(){
   const data = JSON.parse(JSON.stringify(model.value));
-  if(!shouldHaveOptions()){
-    delete data.data.options;
-  }
 
   emit('change', data);
 }

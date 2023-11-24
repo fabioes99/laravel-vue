@@ -26,7 +26,31 @@
         class="opacity-0 animate-fade-in-down"
       />
     </div>
-<pre>{{ surveys.links }}</pre>
+
+    <div class="flex justify-center mt-5">
+      <nav
+      class="relative z-0 inline-flex justify-center rounded-md shadow-sm"
+      aria-label="Pagination"
+      >
+    <a
+      v-for="(link,i) of surveys.links"
+      :key="i"
+      :disabled="!link.url"
+      v-html="link.label"
+      href="#"
+      @click="getForPage($event, link)"
+      aria-current="page"
+      class="relative inline-flex items-center px-4 py-2 border text-sm font-medium whitespace-nowrap"
+      :class="[
+        link.active
+        ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+        : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50',
+        i === 0 ? 'rounded-l-md' : '',
+        i === surveys.links.length - 1 ? 'rounded-r-md' : ''
+      ]"
+    ></a>
+    </nav>
+    </div>
   </div>
 
 </PageComponent>
@@ -52,6 +76,15 @@
       store.dispatch('getSurveys')
     } );
   }
+}
+
+function getForPage(ev, link){
+  ev.preventDefault();
+  if( !link.url || link.active){
+    return;
+  }
+
+  store.dispatch('getSurveys', {url: link.url});
 }
 
 </script>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Survey::class, 'survey_id');
             $table->timestamp('start_date')->nullable();
-            $table->timestamp('end_data')->nullable();
+            $table->timestamp('end_date')->nullable();
         });
     }
 

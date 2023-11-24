@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // por colocar resource nao preciso especificar qual a funcao que este endpoint esta passando
     // como delete, show, edit , etc..
     Route::resource('/surveys', SurveyController::class);
+
+    Route::get('/dashboard/index', [DashboardController::class, 'index']);
 });
 
 Route::get('survey-by-slug/{survey:slug}', [SurveyController::class, 'showForGuest']);

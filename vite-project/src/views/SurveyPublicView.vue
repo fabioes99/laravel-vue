@@ -23,8 +23,6 @@
           </button>
         </div>
 
-
-
         <div v-else>
           <hr class="my=3" />
           <div v-for="(question, ind) of survey.questions" :key="question.id">

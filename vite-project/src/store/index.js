@@ -61,6 +61,19 @@ const store = createStore({
         throw err;
       } )
     },
+    getSurveyBySlug({commit}, slug){
+      commit("setCurrentSurveyLoading", true);
+      return axiosClient.get(`/survey-by-slug/${slug}`)
+      .then(response => {
+        commit("setCurrentSurvey", response.data);
+        commit("setCurrentSurveyLoading", false);
+        return response
+      })
+      .catch( (err) => {
+        commit("setCurrentSurveyLoading", false);
+        throw err;
+      } )
+    },
     saveSurvey( {commit}, survey ){
       delete survey.image_url;
       let response;

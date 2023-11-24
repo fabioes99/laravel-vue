@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // como delete, show, edit , etc..
     Route::resource('/surveys', SurveyController::class);
 
-    Route::get('/dashboard/index', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 });
 
 Route::get('survey-by-slug/{survey:slug}', [SurveyController::class, 'showForGuest']);

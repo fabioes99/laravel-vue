@@ -149,9 +149,9 @@ const store = createStore({
       state.surveys.data = surveys.data;
     },
     logout: (state) => {
-    state.user.data = {};
-    state.user.token = null;
-    sessionStorage.removeItem('TOKEN');
+      state.user.data = {};
+      state.user.token = null;
+      sessionStorage.removeItem('TOKEN');
     },
     setUser: (state, userData) => {
       state.user.token = userData.token;

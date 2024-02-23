@@ -49,6 +49,7 @@ class AuthController extends Controller
         $remember = $credentials['remember'] ?? false;
         unset($credentials['remember']);
 
+
         if(!Auth::attempt($credentials, $remember)){
             return response([
                 'error' => 'The provided credentials are incorrect'

@@ -209,6 +209,13 @@ watch(
 
   function onImageChoose(ev){
     const file = ev.target.files[0];
+    const allowedExtensions = ['jpg', 'jpeg', 'gif', 'png'];
+
+    const extension = file.name.split('.').pop().toLowerCase();
+    if (!allowedExtensions.includes(extension)) {
+        alert('Por favor, selecione um arquivo de imagem com extensão JPG, JPEG, GIF ou PNG.');
+        return;
+    }
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -243,7 +250,14 @@ watch(
         name: "SurveyView",
         params: { id: data.data.id },
       });
-    } );
+      } ).catch(error => {
+            if (error.response && error.response.data && error.response.data.message) {
+                const errorMessage = error.response.data.message;
+                store.commit('notify', { type: 'error', message: errorMessage });
+            } else {
+                store.commit('notify', { type: 'error', message: "Não foi possivel salvar a pesquisa" });
+            }
+        });
   }
 
 function deleteSurvey(){

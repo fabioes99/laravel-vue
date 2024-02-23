@@ -174,17 +174,17 @@ class SurveyController extends Controller
             $type = strtolower($type[1]);
 
             if(!in_array($type, ['jpg', 'jpeg', 'gif', 'png'])){
-                throw new Exception('invalid image type');
+                throw new \Exception('Tipo de imagem iválido');
             }
 
             $image = str_replace('','+',$image);
             $image = base64_decode($image);
 
             if($image === false){
-                throw new Exception('base_64_decode failed');
+                throw new \Exception('base_64_decode failed');
             }
         } else {
-            throw new Exception('did not match data URI with image data');
+            throw new \Exception('Não foi possivel carregar a imagem');
         }
 
         $dir = 'images/';
